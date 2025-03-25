@@ -26,7 +26,7 @@ void changeColor(int &v_red, int &v_green, int &v_blue, int v_red_f, int v_green
 void colorElf(int &v_red, int &v_green, int &v_blue);
 void colorHobbit(int &v_red, int &v_green, int &v_blue);
 void colorDwarf(int &v_red, int &v_green, int &v_blue);
-void colorMagician(int &v_red, int &v_green, int &v_blue);
+void colorHuman(int &v_red, int &v_green, int &v_blue);
 //----------------------------------------------
 void setup()
 {
@@ -86,7 +86,7 @@ void loop()
 //----------------------------------------------
 void colorElf(int &v_red, int &v_green, int &v_blue)
 {
-    int v_red_f = 0, v_green_f = 255, v_blue_f = 0;
+    int v_red_f = 0, v_green_f = 255, v_blue_f = 0; // green
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
     Serial.println("Elf");
     delay(DELAY2);
@@ -94,7 +94,7 @@ void colorElf(int &v_red, int &v_green, int &v_blue)
 //----------------------------------------------
 void colorHobbit(int &v_red, int &v_green, int &v_blue)
 {
-    int v_red_f = 255, v_green_f = 255, v_blue_f = 0;
+    int v_red_f = 255, v_green_f = 255, v_blue_f = 0; // yellow
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
     Serial.println("Hobbit");
     delay(DELAY2);
@@ -102,17 +102,17 @@ void colorHobbit(int &v_red, int &v_green, int &v_blue)
 //----------------------------------------------
 void colorDwarf(int &v_red, int &v_green, int &v_blue)
 {
-    int v_red_f = 255, v_green_f = 0, v_blue_f = 0;
+    int v_red_f = 255, v_green_f = 0, v_blue_f = 0; // red
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
     Serial.println("Dwarf");
     delay(DELAY2);
 }
 //----------------------------------------------
-void colorMagician(int &v_red, int &v_green, int &v_blue)
+void colorHuman(int &v_red, int &v_green, int &v_blue)
 {
-    int v_red_f = 64, v_green_f = 224, v_blue_f = 208;
+    int v_red_f = 138, v_green_f = 149, v_blue_f = 151; // grey
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
-    Serial.println("Magician");
+    Serial.println("Human");
     delay(DELAY2);
 }
 //----------------------------------------------
