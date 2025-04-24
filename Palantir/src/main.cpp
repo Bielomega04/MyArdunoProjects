@@ -24,6 +24,7 @@ void viewRemoteValues();
 void testLED();
 void neutralColor(int &v_red, int &v_blue, int &v_green);
 void changeColor(int &v_red, int &v_green, int &v_blue, int v_red_f, int v_green_f, int v_blue_f);
+void changeColor(int &initialColor, int finalColor, int PIN);
 void colorElf(int &v_red, int &v_green, int &v_blue);
 void colorHobbit(int &v_red, int &v_green, int &v_blue);
 void colorDwarf(int &v_red, int &v_green, int &v_blue);
@@ -58,7 +59,6 @@ void colorElf(int &v_red, int &v_green, int &v_blue)
 {
     int v_red_f = 0, v_green_f = 255, v_blue_f = 0; // green
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
-    Serial.println("Elf");
     delay(DELAY2);
 }
 //----------------------------------------------
@@ -66,7 +66,6 @@ void colorHobbit(int &v_red, int &v_green, int &v_blue)
 {
     int v_red_f = 255, v_green_f = 100, v_blue_f = 0; // yellow
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
-    Serial.println("Hobbit");
     delay(DELAY2);
 }
 //----------------------------------------------
@@ -74,15 +73,13 @@ void colorDwarf(int &v_red, int &v_green, int &v_blue)
 {
     int v_red_f = 255, v_green_f = 0, v_blue_f = 0; // red
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
-    Serial.println("Dwarf");
     delay(DELAY2);
 }
 //----------------------------------------------
 void colorHuman(int &v_red, int &v_green, int &v_blue)
 {
-    int v_red_f = 25, v_green_f = 49, v_blue_f = 120; // grey
+    int v_red_f = 25, v_green_f = 49, v_blue_f = 120; // blue
     changeColor(v_red, v_green, v_blue, v_red_f, v_green_f, v_blue_f);
-    Serial.println("Human");
     delay(DELAY2);
 }
 //----------------------------------------------
@@ -141,64 +138,15 @@ void testLED()
 //----------------------------------------------
 void changeColor(int &v_red, int &v_green, int &v_blue, int v_red_f, int v_green_f, int v_blue_f)
 {
-    if (v_red_f > v_red)
-    {
-        for (int i = v_red; i <= v_red_f; i++)
-        {
-            analogWrite(RED, i);
-            delay(DELAY);
-        }
-    }
-    else
-    {
-        for (int i = v_red; i >= v_red_f; i--)
-        {
-            analogWrite(RED, i);
-            delay(DELAY);
-        }
-    }
-    if (v_green_f > v_green)
-    {
-        for (int i = v_green; i <= v_green_f; i++)
-        {
-            analogWrite(GREEN, i);
-            delay(DELAY);
-        }
-    }
-    else
-    {
-        for (int i = v_green; i >= v_green_f; i--)
-        {
-            analogWrite(GREEN, i);
-            delay(DELAY);
-        }
-    }
-    if (v_blue_f > v_blue)
-    {
-        for (int i = v_blue; i <= v_blue_f; i++)
-        {
-            analogWrite(BLUE, i);
-            delay(DELAY);
-        }
-    }
-    else
-    {
-        for (int i = v_blue; i >= v_blue_f; i--)
-        {
-            analogWrite(BLUE, i);
-            delay(DELAY);
-        }
-    }
-    v_red = v_red_f;
-    v_green = v_green_f;
-    v_blue = v_blue_f;
+    changeColor(v_red, v_red_f, RED);
+    changeColor(v_blue, v_blue_f, BLUE);
+    changeColor(v_green, v_green_f, GREEN);
 }
 //----------------------------------------------
 void readIRRemote()
 {
     if (IrReceiver.decode())
     {
-        Serial.println(IrReceiver.decodedIRData.decodedRawData, HEX);
         key_pressed = IrReceiver.decodedIRData.decodedRawData;
         switch (key_pressed)
         {
@@ -223,3 +171,17 @@ void readIRRemote()
     }
 }
 //----------------------------------------------
+void changeColor(int &initialColor, int finalColor, int PIN){
+    if(initialColor > finalColor){
+        for(int i = initialColor; i <= finalColor; i++){
+            analogWrite(PIN, i);
+            delay(DELAY);
+        }
+    }else{
+        for(int i = initialColor; i >= finalColor; i--){
+            analogWrite(PIN, i);
+            delay(DELAY);
+        }
+    }
+    initialColor = finalColor;
+}
