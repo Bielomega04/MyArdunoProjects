@@ -11,7 +11,7 @@
 #define KEY_4 0xF708FF00
 #define KEY_5 0XE31CFF00
 const int DELAY = 25;
-const int DELAY2 = 5000;
+const int DELAY2 = 7500;
 int v_red = random(0, 255), v_green = random(0, 255), v_blue = random(0, 255);
 unsigned long waitTime = 2000;
 unsigned long lastCall = 0;
@@ -49,8 +49,7 @@ void loop()
     time = millis();
     if (time % waitTime == 0)
     {
-        neutralColor(v_red, v_green, v_blue);
-        //randomNeutralColor(v_red, v_green, v_blue);
+        randomNeutralColor(v_red, v_green, v_blue);
     }
     else
     {
